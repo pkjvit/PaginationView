@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="PaginationView">
+        <attr name="maxPage" format="integer" />
+        <attr name="dimension" format="dimension" />
+        <attr name="color" format="color" />
+    </declare-styleable>
+</resources>
