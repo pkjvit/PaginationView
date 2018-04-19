@@ -26,5 +26,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation project(':paginationview')
+    implementation 'com.pkj.wow.paginationview:PaginationView:1.0.1-1'
+//    implementation project(':PaginationView')
 }
