@@ -10,8 +10,15 @@ Pagination view for Android to show large amount of data just like PHP paginator
 </div>
 
 ## Usage
+1. Add the following in the dependencies section of the application's build.gradle (the one in the app folder).
 
-Add PaginationView to your activity's layout and set parent property "clipChildren" to false.
+```
+dependencies {
+    compile 'com.pkj.wow.paginationview:PaginationView:1.0.1-1'
+}
+```
+
+2. Add PaginationView to your activity's layout and set parent property "clipChildren" to false.
 ```xml
 <com.pkj.wow.paginationview.PaginationView
         android:id="@+id/pagination_view"
@@ -21,7 +28,7 @@ Add PaginationView to your activity's layout and set parent property "clipChildr
         />
 ```
 
-Set total data size, page size and add page update listener which will call after pager update.
+3. Set total data size, page size and add page update listener which will call after pager update.
 ```
 mPaginationView.setPager(list.size(), 50);
 mPaginationView.setOnPagerUpdate(new PaginationView.OnPagerUpdate() {
