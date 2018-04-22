@@ -2,6 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingVertical="4dp"
+    android:background="@android:color/white"
     android:gravity="center_vertical">
     <ImageButton
         android:id="@+id/left_arrow"
@@ -32,9 +36,27 @@
     <TextView
         android:id="@+id/tv_current_page"
         android:layout_width="32dp"
-        android:layout_height="54dp"
+        android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:gravity="bottom|center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tv_current_page_popup"
+        android:layout_width="32dp"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:visibility="invisible"
+        android:textColor="@android:color/white"
+        android:background="@drawable/popup_bg"
+        android:elevation="4dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_total_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="4dp"
+        android:layout_alignParentRight="true"/>
 
     <!--<TextView
         android:id="@+id/tv_current_page"
