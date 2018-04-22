@@ -128,9 +128,9 @@ public class PaginationView extends RelativeLayout {
         mPagerPopupTV.setText((progress+1)+"");
         Rect bounds = mSeekBar.getThumb().getBounds();
         mPagerTV.setTranslationX(mSeekBar.getLeft() + bounds.left);
-        mPagerTV.setTranslationY(bounds.height()*120/100);
+        mPagerTV.setTranslationY(bounds.height()*130/100);
         mPagerPopupTV.setTranslationX(mSeekBar.getLeft() + bounds.left);
-        mPagerPopupTV.setTranslationY(-bounds.height()*12/20);/**/
+        mPagerPopupTV.setTranslationY(-bounds.height()*12/20);
         if(progress<=0){
             mLeftBtn.setEnabled(false);
         }else{
