@@ -2,13 +2,13 @@ package com.pkj.wow.paginationview;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.widget.TextViewCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,12 +18,16 @@ public class PaginationView extends RelativeLayout {
 
     private SeekBar mSeekBar;
     private TextView mPagerTV;
+    private TextView mPagerPopupTV;
+    private TextView mTotalPageTV;
     private ImageButton mLeftBtn;
     private ImageButton mRightBtn;
     private int mPageCount;
     private int mTotalCount;
     private int mPageSize;
     private OnPagerUpdate mOnPagerUpdate;
+    private Context mContext;
+    private PopupWindow mPopupWindow;
 
     public PaginationView(Context context) {
         super(context);
@@ -41,12 +45,17 @@ public class PaginationView extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
+        mContext = context;
         LayoutInflater mInflater = LayoutInflater.from(context);
         View v = mInflater.inflate(R.layout.layout_pagination_view, this, true);
         mSeekBar = v.findViewById(R.id.seekbar);
         mPagerTV = v.findViewById(R.id.tv_current_page);
+        mPagerPopupTV = v.findViewById(R.id.tv_current_page_popup);
         mLeftBtn = v.findViewById(R.id.left_arrow);
         mRightBtn = v.findViewById(R.id.right_arrow);
+        mTotalPageTV = v.findViewById(R.id.tv_total_page);
+        ((ViewGroup)mPagerTV.getParent().getParent()).setClipChildren(false);
+//        ((ViewGroup)mPagerTV.getParent().getParent()).setClipToPadding(false);
         this.post(new Runnable() {
             @Override
             public void run() {
@@ -63,11 +72,12 @@ public class PaginationView extends RelativeLayout {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                mPagerPopupTV.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                mPagerPopupTV.setVisibility(View.INVISIBLE);
                 if(mOnPagerUpdate != null){
                     mOnPagerUpdate.onUpdate(mSeekBar.getProgress(), mPageSize);
                 }
@@ -92,6 +102,7 @@ public class PaginationView extends RelativeLayout {
     private void setPageCount(int pageCount){
         mPageCount = pageCount;
         mSeekBar.setMax(pageCount);
+        mTotalPageTV.setText((mPageCount+1)+"");
     }
 
     public int getPageCount() {
@@ -114,8 +125,12 @@ public class PaginationView extends RelativeLayout {
 
     private void updatePosition(int progress){
         mPagerTV.setText((progress+1)+"");
+        mPagerPopupTV.setText((progress+1)+"");
         Rect bounds = mSeekBar.getThumb().getBounds();
         mPagerTV.setTranslationX(mSeekBar.getLeft() + bounds.left);
+        mPagerTV.setTranslationY(bounds.height()*130/100);
+        mPagerPopupTV.setTranslationX(mSeekBar.getLeft() + bounds.left);
+        mPagerPopupTV.setTranslationY(-bounds.height()*12/20);
         if(progress<=0){
             mLeftBtn.setEnabled(false);
         }else{

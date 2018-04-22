@@ -1,5 +1,6 @@
 package com.pkj.wow.paginationviewsample;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -46,6 +47,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(mDataset[position]);
+        if(position%2==0){
+            holder.mTextView.setBackgroundColor(Color.parseColor("#ffffff"));
+        }else{
+            holder.mTextView.setBackgroundColor(Color.parseColor("#eff1f3"));
+        }
 
     }
 
