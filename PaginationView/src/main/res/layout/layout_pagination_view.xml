@@ -8,16 +8,16 @@
     android:gravity="center_vertical">
     <ImageButton
         android:id="@+id/left_arrow"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:src="@drawable/selector_left_arrow"
         android:background="?android:attr/selectableItemBackground"
         android:layout_centerVertical="true"/>
 
     <ImageButton
         android:id="@+id/right_arrow"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/selector_right_arrow"
         android:background="?android:attr/selectableItemBackground"
@@ -57,8 +57,18 @@
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:paddingRight="8dp"
-        android:text="123"
+        android:text=""
         android:gravity="bottom"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/tv_total_data"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dp"
+        android:text=""
+        android:gravity="top"
         android:layout_alignParentRight="true"/>
 
     <!--<TextView

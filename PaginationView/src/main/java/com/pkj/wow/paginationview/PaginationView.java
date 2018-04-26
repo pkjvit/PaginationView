@@ -2,6 +2,7 @@ package com.pkj.wow.paginationview;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class PaginationView extends RelativeLayout {
     private TextView mPagerTV;
     private TextView mPagerPopupTV;
     private TextView mTotalPageTV;
+    private TextView mTotalDataTV;
     private ImageButton mLeftBtn;
     private ImageButton mRightBtn;
     private int mPageCount;
@@ -54,6 +56,7 @@ public class PaginationView extends RelativeLayout {
         mLeftBtn = v.findViewById(R.id.left_arrow);
         mRightBtn = v.findViewById(R.id.right_arrow);
         mTotalPageTV = v.findViewById(R.id.tv_total_page);
+        mTotalDataTV = v.findViewById(R.id.tv_total_data);
         ((ViewGroup)mPagerTV.getParent().getParent()).setClipChildren(false);
 //        ((ViewGroup)mPagerTV.getParent().getParent()).setClipToPadding(false);
         this.post(new Runnable() {
@@ -116,6 +119,7 @@ public class PaginationView extends RelativeLayout {
     public void setPager(int totalCount, int pageSize) {
         mTotalCount = totalCount;
         mPageSize = pageSize;
+        mTotalDataTV.setText(Html.fromHtml("<small>"+mTotalCount+"</small>")) ;
         setPageCount((mTotalCount%mPageSize==0) ? (mTotalCount/mPageSize)-1 : mTotalCount/mPageSize);
     }
 
