@@ -2,6 +2,7 @@ package com.pkj.wow.paginationview;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Html;
 import android.util.AttributeSet;
@@ -187,9 +188,9 @@ public class PaginationView extends RelativeLayout {
     }
 
     private void updatePage(boolean increase){
-        int currentPage = mSeekBar.getProgress();
+        int currentPage = mSeekBar.getProgress()/mPagerSmoother;
         if(increase){
-            if(currentPage<mSeekBar.getMax()){
+            if(currentPage<mSeekBar.getMax()/mPagerSmoother){
                 currentPage++;
             }
         }else{
@@ -197,9 +198,9 @@ public class PaginationView extends RelativeLayout {
                 currentPage--;
             }
         }
-        mSeekBar.setProgress(currentPage);
+        mSeekBar.setProgress(currentPage*mPagerSmoother);
         if(mOnPagerUpdate != null){
-            mOnPagerUpdate.onUpdate(mSeekBar.getProgress(), mPageSize);
+            mOnPagerUpdate.onUpdate(mSeekBar.getProgress()/mPagerSmoother, mPageSize);
         }
     }
 
