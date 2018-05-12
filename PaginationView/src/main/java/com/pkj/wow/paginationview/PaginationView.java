@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 public class PaginationView extends RelativeLayout {
 
+    private final static int DEFAULT_PAGE_SIZE = 50;
     private SeekBar mSeekBar;
     private TextView mPagerTV;
     private TextView mPagerPopupTV;
@@ -30,7 +31,7 @@ public class PaginationView extends RelativeLayout {
     private AppCompatSpinner mPagerSpinner;
     private int mPageCount;
     private int mTotalCount;
-    private int mPageSize;
+    private int mPageSize = DEFAULT_PAGE_SIZE;
     private int mPagerSmoother = 1;
     private OnPagerUpdate mOnPagerUpdate;
     private Context mContext;
@@ -148,7 +149,7 @@ public class PaginationView extends RelativeLayout {
         return mTotalCount;
     }
 
-    public void setPager(int totalCount, int pageSize) {
+    private void setPager(int totalCount, int pageSize) {
         mTotalCount = totalCount;
         mPageSize = pageSize;
         mTotalDataTV.setText(Html.fromHtml("<b>"+mTotalCount+"</b>")) ;
@@ -161,6 +162,10 @@ public class PaginationView extends RelativeLayout {
             mPagerSmoother = 1;
         }
         setPageCount((mTotalCount%mPageSize==0) ? pageCount-1 : pageCount);
+    }
+
+    public void setPager(int totalCount) {
+        setPager(totalCount, mPageSize);
     }
 
     public void setOnPagerUpdate(OnPagerUpdate onPagerUpdate) {
