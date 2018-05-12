@@ -2,12 +2,15 @@ package com.pkj.wow.paginationview;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.v7.widget.AppCompatSpinner;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -24,6 +27,7 @@ public class PaginationView extends RelativeLayout {
     private TextView mTotalDataTV;
     private ImageButton mLeftBtn;
     private ImageButton mRightBtn;
+    private AppCompatSpinner mPagerSpinner;
     private int mPageCount;
     private int mTotalCount;
     private int mPageSize;
@@ -57,6 +61,7 @@ public class PaginationView extends RelativeLayout {
         mRightBtn = v.findViewById(R.id.right_arrow);
         mTotalPageTV = v.findViewById(R.id.tv_total_page);
         mTotalDataTV = v.findViewById(R.id.tv_total_data);
+        mPagerSpinner = v.findViewById(R.id.pager_size_spinner);
         ((ViewGroup)mPagerTV.getParent().getParent()).setClipChildren(false);
 //        ((ViewGroup)mPagerTV.getParent().getParent()).setClipToPadding(false);
         this.postDelayed(new Runnable() {
@@ -100,6 +105,32 @@ public class PaginationView extends RelativeLayout {
                 updatePage(true);
             }
         });
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(mContext,
+                R.array.pagger_array, R.layout.layout_page_item_view);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPagerSpinner.setAdapter(adapter);
+        mPagerSpinner.setSelection(2);
+
+        mPagerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int pageSize = Integer.valueOf(parent.getAdapter().getItem(position).toString());
+                setPager(mTotalCount, pageSize);
+                updatePosition(0);
+                mSeekBar.setProgress(0);
+                if(mOnPagerUpdate != null){
+                    mOnPagerUpdate.onUpdate(0, mPageSize);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     }
 
     private void setPageCount(int pageCount){

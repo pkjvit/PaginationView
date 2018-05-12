@@ -55,7 +55,7 @@
         android:id="@+id/detail_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@id/pager_size_spinner"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="4dp">
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#cccccc" />
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/tv_total_data"
@@ -86,6 +86,14 @@
             android:text="2000" />
     </LinearLayout>
 
+    <android.support.v7.widget.AppCompatSpinner
+        style="@style/Widget.AppCompat.Spinner.DropDown"
+        android:id="@+id/pager_size_spinner"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        ></android.support.v7.widget.AppCompatSpinner>
 
     <!--<TextView
         android:id="@+id/tv_current_page"
