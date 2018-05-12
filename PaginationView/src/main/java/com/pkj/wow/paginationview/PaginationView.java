@@ -59,13 +59,13 @@ public class PaginationView extends RelativeLayout {
         mTotalDataTV = v.findViewById(R.id.tv_total_data);
         ((ViewGroup)mPagerTV.getParent().getParent()).setClipChildren(false);
 //        ((ViewGroup)mPagerTV.getParent().getParent()).setClipToPadding(false);
-        this.post(new Runnable() {
+        this.postDelayed(new Runnable() {
             @Override
             public void run() {
 //                TextViewCompat.setAutoSizeTextTypeWithDefaults(mPagerTV, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
                 updatePosition(mSeekBar.getProgress());
             }
-        });
+        },200);
 
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -119,7 +119,7 @@ public class PaginationView extends RelativeLayout {
     public void setPager(int totalCount, int pageSize) {
         mTotalCount = totalCount;
         mPageSize = pageSize;
-        mTotalDataTV.setText(Html.fromHtml("<small>"+mTotalCount+"</small>")) ;
+        mTotalDataTV.setText(Html.fromHtml("<b>"+mTotalCount+"</b>")) ;
         setPageCount((mTotalCount%mPageSize==0) ? (mTotalCount/mPageSize)-1 : mTotalCount/mPageSize);
     }
 
