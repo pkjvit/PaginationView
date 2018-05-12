@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Html;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ public class PaginationView extends RelativeLayout {
     private int mPageCount;
     private int mTotalCount;
     private int mPageSize;
+    private int mPagerSmoother = 1;
     private OnPagerUpdate mOnPagerUpdate;
     private Context mContext;
     private PopupWindow mPopupWindow;
@@ -75,7 +75,7 @@ public class PaginationView extends RelativeLayout {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                updatePosition(progress);
+                updatePosition(progress/mPagerSmoother);
             }
 
             @Override
@@ -87,7 +87,7 @@ public class PaginationView extends RelativeLayout {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mPagerPopupTV.setVisibility(View.INVISIBLE);
                 if(mOnPagerUpdate != null){
-                    mOnPagerUpdate.onUpdate(mSeekBar.getProgress(), mPageSize);
+                    mOnPagerUpdate.onUpdate(mSeekBar.getProgress()/mPagerSmoother, mPageSize);
                 }
             }
         });
@@ -135,7 +135,7 @@ public class PaginationView extends RelativeLayout {
 
     private void setPageCount(int pageCount){
         mPageCount = pageCount;
-        mSeekBar.setMax(pageCount);
+        mSeekBar.setMax(pageCount*mPagerSmoother);
         mTotalPageTV.setText((mPageCount+1)+"");
     }
 
@@ -151,7 +151,15 @@ public class PaginationView extends RelativeLayout {
         mTotalCount = totalCount;
         mPageSize = pageSize;
         mTotalDataTV.setText(Html.fromHtml("<b>"+mTotalCount+"</b>")) ;
-        setPageCount((mTotalCount%mPageSize==0) ? (mTotalCount/mPageSize)-1 : mTotalCount/mPageSize);
+        int pageCount = mTotalCount/mPageSize;
+        if(pageCount<10){
+            mPagerSmoother = 50;
+        }else if(pageCount<80){
+            mPagerSmoother = 10;
+        }else{
+            mPagerSmoother = 1;
+        }
+        setPageCount((mTotalCount%mPageSize==0) ? pageCount-1 : pageCount);
     }
 
     public void setOnPagerUpdate(OnPagerUpdate onPagerUpdate) {
