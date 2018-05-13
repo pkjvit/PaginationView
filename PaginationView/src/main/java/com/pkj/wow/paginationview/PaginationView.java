@@ -149,6 +149,10 @@ public class PaginationView extends RelativeLayout {
         return mTotalCount;
     }
 
+    public int getPageSize() {
+        return mPageSize;
+    }
+
     private void setPager(int totalCount, int pageSize) {
         mTotalCount = totalCount;
         mPageSize = pageSize;
