@@ -176,7 +176,7 @@ public class PaginationView extends RelativeLayout {
         mOnPagerUpdate = onPagerUpdate;
     }
 
-    private void updatePosition(int progress){
+    public void updatePosition(int progress){
         mPagerTV.setText((progress+1)+"");
         mPagerPopupTV.setText((progress+1)+"");
         Rect bounds = mSeekBar.getThumb().getBounds();
