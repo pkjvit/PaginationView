@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(getDataset(0, pageSize));
         mRecyclerView.setAdapter(mAdapter);
 
-        mPaginationView.setPager(size, 50);
+        mPaginationView.setPager(size);
         mPaginationView.setOnPagerUpdate(new PaginationView.OnPagerUpdate() {
             @Override
             public void onUpdate(int pageNumber, int pageSize) {
