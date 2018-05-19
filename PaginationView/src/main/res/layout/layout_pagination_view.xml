@@ -6,10 +6,11 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:gravity="center_vertical">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/light_gray"/>
+        android:background="@color/light_gray" />
 
     <ImageButton
         android:id="@+id/left_arrow"
@@ -19,23 +20,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:src="@drawable/selector_left_arrow" />
 
-    <ImageButton
-        android:id="@+id/right_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/detail_layout"
-        android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/selector_right_arrow" />
 
-    <SeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/right_arrow"
-        android:layout_toRightOf="@id/left_arrow"
-        android:thumb="@drawable/ic_beenhere_black_24dp" />
 
     <TextView
         android:id="@+id/tv_current_page"
@@ -54,6 +39,14 @@
         android:gravity="center_horizontal"
         android:textColor="@android:color/white"
         android:visibility="invisible" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/pager_size_spinner"
+        style="@style/Widget.AppCompat.Spinner.DropDown"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"></android.support.v7.widget.AppCompatSpinner>
 
     <LinearLayout
         android:id="@+id/detail_layout"
@@ -90,14 +83,23 @@
             android:text="2000" />
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatSpinner
-        style="@style/Widget.AppCompat.Spinner.DropDown"
-        android:id="@+id/pager_size_spinner"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+    <ImageButton
+        android:id="@+id/right_arrow"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
-        ></android.support.v7.widget.AppCompatSpinner>
+        android:layout_toLeftOf="@id/detail_layout"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/selector_right_arrow" />
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/right_arrow"
+        android:layout_toRightOf="@id/left_arrow"
+        android:thumb="@drawable/ic_beenhere_black_24dp" />
 
     <!--<TextView
         android:id="@+id/tv_current_page"
