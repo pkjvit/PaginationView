@@ -4,8 +4,7 @@ Pagination view for Android to show large amount of data just like PHP paginator
 ## Screen Shots
 
 <div>
-<img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/device-2018-04-22-181415.png" width="200">
-<img width="20">
+<img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/device-2018-04-22-181415.png" width="200"><img width="20">
 <img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/pagination_detail.png" width="490">
 </div>
 
@@ -14,7 +13,7 @@ Pagination view for Android to show large amount of data just like PHP paginator
 
 ```
     dependencies {
-        compile 'com.pkj.wow.paginationview:PaginationView:1.0.2'
+        compile 'com.pkj.wow.paginationview:PaginationView:1.0.2-7'
     }
 ```
 
@@ -30,12 +29,13 @@ Pagination view for Android to show large amount of data just like PHP paginator
 
 3. Set total data size, page size and add page update listener which will call after pager update.
 ```
-    mPaginationView.setPager(list.size(), 50);
+    mPaginationView.setPager(list.size());
     mPaginationView.setOnPagerUpdate(new PaginationView.OnPagerUpdate() {
         @Override
         public void onUpdate(int pageNumber, int pageSize) {
             // query your data from page number to page size according to your requirement
             ...
+            // notify your adapter
         }
     });
 ```
@@ -75,7 +75,7 @@ Activity code
 mAdapter = new MyAdapter(getDataset(0, pageSize));
 mRecyclerView.setAdapter(mAdapter);
 
-mPaginationView.setPager(size, 50);
+mPaginationView.setPager(size);
 mPaginationView.setOnPagerUpdate(new PaginationView.OnPagerUpdate() {
     @Override
     public void onUpdate(int pageNumber, int pageSize) {
