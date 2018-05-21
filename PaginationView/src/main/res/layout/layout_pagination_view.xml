@@ -44,6 +44,7 @@
         android:id="@+id/pager_size_spinner"
         style="@style/Widget.AppCompat.Spinner.DropDown"
         android:layout_width="68dp"
+        android:layout_marginLeft="4dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"></android.support.v7.widget.AppCompatSpinner>
