@@ -6,7 +6,7 @@ Pagination view for Android to show large amount of data just like PHP paginator
 <div>
 <img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/device-2018-04-22-181415.png" width="200">
 <img width="20">
-<img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/pagination_detail.png" width="400">
+<img src="https://raw.githubusercontent.com/pkjvit/PaginationView/master/ScreenShots/pagination_detail.png" width="500">
 </div>
 
 ## Usage
