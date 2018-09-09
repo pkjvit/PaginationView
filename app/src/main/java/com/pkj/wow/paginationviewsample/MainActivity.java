@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         mPaginationView.setPager(size);
+        mPaginationView.setDefaultPageSize(PaginationView.PAGE_SIZE_20);
         mPaginationView.setOnPagerUpdate(new PaginationView.OnPagerUpdate() {
             @Override
             public void onUpdate(int pageNumber, int pageSize) {
