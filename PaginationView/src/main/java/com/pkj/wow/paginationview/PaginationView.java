@@ -3,6 +3,7 @@ package com.pkj.wow.paginationview;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.IntDef;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Html;
 import android.util.AttributeSet;
@@ -17,8 +18,24 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 
 public class PaginationView extends RelativeLayout {
+
+    public static final int PAGE_SIZE_10 = 0;
+    public static final int PAGE_SIZE_20 = 1;
+    public static final int PAGE_SIZE_50 = 2;
+    public static final int PAGE_SIZE_100 = 3;
+    public static final int PAGE_SIZE_200 = 4;
+    public static final int PAGE_SIZE_500 = 5;
+
+    @IntDef({PAGE_SIZE_10, PAGE_SIZE_20, PAGE_SIZE_50, PAGE_SIZE_100, PAGE_SIZE_200, PAGE_SIZE_500})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface PageSize {}
+
+    @PageSize int mDefaultPageSize = PAGE_SIZE_50;
 
     private final static int DEFAULT_PAGE_SIZE = 50;
     private SeekBar mSeekBar;
@@ -112,7 +129,7 @@ public class PaginationView extends RelativeLayout {
                 R.array.pagger_array, R.layout.layout_page_item_view);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPagerSpinner.setAdapter(adapter);
-        mPagerSpinner.setSelection(2);
+        setDefaultPageSize(PAGE_SIZE_50);
 
         mPagerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -139,6 +156,11 @@ public class PaginationView extends RelativeLayout {
         mPageCount = pageCount;
         mSeekBar.setMax(pageCount*mPagerSmoother);
         mTotalPageTV.setText((mPageCount+1)+"");
+    }
+
+    public void setDefaultPageSize(@PageSize int defaultPageSizeIndex){
+        mDefaultPageSize = defaultPageSizeIndex;
+        mPagerSpinner.setSelection(mDefaultPageSize);
     }
 
     public int getPageCount() {
